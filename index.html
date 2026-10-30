@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Glow Beauty</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#fff7fa;
+    color:#333;
+}
+
+header{
+    background:linear-gradient(135deg,#e83e6f,orange);
+    color:white;
+    padding:15px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.header{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+}
+
+.cartTop{
+    background:white;
+    color:#e83e6f;
+    border:none;
+    padding:10px 16px;
+    border-radius:25px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.searchBox{
+    max-width:1200px;
+    margin:12px auto 0;
+    display:flex;
+    gap:8px;
+}
+
+.searchBox input{
+    margin:0;
+    border:none;
+    outline:none;
+    background:white;
+    padding:12px 18px;
+    border-radius:25px;
+    flex:1;
+    font-size:15px;
+}
+
+.searchBtn{
+    border:none;
+    background:white;
+    color:#d93664;
+    padding:0 18px;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+/*.categories{
+    max auto 0;
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+*/
+.categories {
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+.categories button{
+    border:none;
+    background:white;
+    color:#d93664;
+    padding:9px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.categories button.active{
+    background:#d93664;
+    color:white;
+}
+
+.hero{
+    max-width:1200px;
+    margin:20px auto;
+    padding:45px 20px;
+    text-align:center;
+    background:linear-gradient(135deg,#ffe0e9,#fff);
+    border-radius:25px;
+}
+
+.hero h1{
+    color:#e83e6f;
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:black;
+    margin-bottom:20px;
+}
+
+.shopBtn{
+    border:none;
+    background:#e83e6f;
+    color:white;
+    padding:13px 28px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+.container{
+    width:94%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.title{
+    color:black;
+    text-align:center;
+    margin:25px 0 18px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:17px;
+}
+
+.product{
+    background:white;
+    border-radius:18px;
+    padding:12px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.product img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.product h3{
+    margin:10px 0 5px;
+    color:#d93664;
+}
+
+.product .price{
+    color:#e83e6f;
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.product button{
+    border:none;
+    padding:9px 11px;
+    border-radius:20px;
+    cursor:pointer;
+    margin:3px;
+}
+
+.viewBtn{
+    background:#ffe1e9;
+    color:#d93664;
+}
+
+.addBtn{
+    background:#ff5685;
+    color:white;
+}
+
+.productId{
+    font-size:12px;
+    color:#777;
+    margin-top:5px;
+}
+
+#details{
+    display:none;
+    background:#fff0f4;
+    max-width:650px;
+    margin:25px auto;
+    padding:22px;
+    border-radius:22px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+}
+
+#details img{
+    width:260px;
+    height:260px;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+#details h2{
+    color:#d93664;
+    margin:12px;
+}
+
+.detailPrice{
+    color:#e83e6f;
+    font-size:25px;
+    font-weight:bold;
+    margin:12px;
+}
+
+.detailAdd{
+    background:#ff5685;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+.box{
+    background:white;
+    margin:30px auto;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.cartItem{
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cartItem h3{
+    color:#d93664;
+    margin-bottom:6px;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:10px 0;
+}
+
+.quantity button{
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:50%;
+    background:#ff6f91;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.quantity span{
+    font-weight:bold;
+}
+
+.removeBtn{
+    border:none;
+    background:#555;
+    color:white;
+    padding:7px 12px;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.total{
+    text-align:right;
+    color:#e83e6f;
+    font-size:23px;
+    font-weight:bold;
+    margin-top:18px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+textarea{
+    height:90px;
+}
+
+.orderBtn{
+    width:100%;
+    border:none;
+    background:#e83e6f;
+    color:white;
+    padding:13px;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:17px;
+    margin-top:10px;
+}
+
+#success{
+    display:none;
+    background:#e9fff1;
+    color:#16723a;
+    padding:25px;
+    margin:25px auto;
+    border-radius:20px;
+    text-align:center;
+}
+
+footer{
+    background:#ff5685;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:30px;
+}
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:21px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    /*.products{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+       */.products{
+    grid-template-columns:repeat(2,1fr) !important;
+    gap:12px !important;
+}
+        /*.products{
+    grid-template-columns:repeat(2,1fr) !important;
+   */ gap:12px !important;
+
+    }
+
+    .product{
+        padding:8px;
+    }
+
+    .product img{
+        height:145px;
+    }
+
+    .product h3{
+        font-size:15px;
+    }
+
+    .product button{
+        font-size:11px;
+        padding:8px;
+    }
+
+    #details img{
+        width:210px;
+        height:210px;
+    }
+
+    .searchBox{
+        width:94%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="header">
+
+<div class="logo">
+✨ Glow Beauty
+</div>
+
+<button class="cartTop" id="cartTop">
+🛒 Cart (<span id="cartCount">0</span>)
+</button>
+
+</div>
+
+<div class="searchBox">
+
+<input
+id="searchInput"
+type="text"
+placeholder="🔎 Search products..."
+>
+
+<button class="searchBtn" id="searchBtn">
+🔍
+</button>
+
+</div>
+
+<div class="categories" id="categories">
+
+<button class="active" data-category="All">All</button>
+<button data-category="Face Care">Face Care</button>
+<button data-category="Facial">Facial</button>
+<button data-category="Skin Care">Skin Care</button>
+<button data-category="Makeup">Makeup</button>
+<button data-category="Hair Care">Hair Care</button>
+<button data-category="Hair Shampoo">Shampoo</button>
+<button data-category="Compact Powder">Compact Powder</button>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>Glow Naturally ✨</h1>
+
+<p>
+Discover beauty products for your everyday care.
+</p>
+
+<button class="shopBtn" id="shopBtn">
+Shop Now 🛍️
+</button>
+
+</section>
+
+<div class="container">
+
+<div id="details">
+
+<img id="detailImage" src="" alt="Product">
+
+<h2 id="detailName"></h2>
+
+<p>
+⭐ Quality:
+<b id="detailQuality"></b>
+</p>
+
+<br>
+
+<p id="detailDescription"></p>
+
+<div class="detailPrice">
+₹<span id="detailPrice"></span>
+</div>
+
+<button class="detailAdd" id="detailAdd">
+🛒 Add To Cart
+</button>
+
+</div>
+
+<h2 class="title">
+Beauty Collection 💖
+</h2>
+
+<div class="products" id="products"></div>
+
+<div class="box" id="cartBox">
+
+<h2 class="title">
+🛒 Your Cart
+</h2>
+
+<div id="cartList">
+
+<p style="text-align:center;">
+Your Cart is Empty 🛒
+</p>
+
+</div>
+
+</div>
+
+<div class="box">
+
+<h2 class="title">
+👤 Customer Details
+</h2>
+
+<input
+id="name"
+type="text"
+placeholder="Enter Your Name"
+>
+
+<input
+id="phone"
+type="tel"
+placeholder="Enter Mobile Number"
+>
+
+<textarea
+id="address"
+placeholder="Enter Delivery Address"
+></textarea>
+
+<select id="payment">
+
+<option value="">
+Select Payment Method
+</option>
+
+<option value="Cash on Delivery">
+Cash on Delivery
+</option>
+
+<option value="Online Payment">
+Online Payment
+</option>
+
+</select>
+
+<button class="orderBtn" id="orderBtn">
+✅ Place Order
+</button>
+
+</div>
+
+<div id="success">
+
+<h2>
+🎉 Order Placed Successfully!
+</h2>
+
+<p id="successText"></p>
+
+</div>
+
+</div>
+
+<footer>
+
+<h3>✨ Glow Beauty</h3>
+
+<p>
+Beauty • Care • Confidence
+</p>
+
+<p>
+© 2026 Glow Beauty
+</p>
+
+</footer>
+
+<script>
+
+/* =========================================
+   SUPABASE CONNECTION
+========================================= */
+
+const SUPABASE_URL =
+"https://mozikyirwarsbjfbxkfj.supabase.co";
+
+/* फक्त या एकाच जागी तुझी Publishable Key टाक */
+
+const SUPABASE_KEY =
+"sb_publishable_KVXWStl-aUMEiMTK4qs7iQ_I8hbrV4J";
+
+
+/* =========================================
+   PRODUCT DATA
+========================================= */
+
+const products = [
+
+{
+id:"FC001",
+name:"Glow Moisturizer",
+category:"Face Care",
+price:299,
+quality:"Excellent",
+description:"Hydrating moisturizer for daily skincare.",
+image:
+"https://images.squarespace-cdn.com/content/v1/61922daa18cacb2b6b0c57d1/0acd36dc-4ba2-4b5a-9534-f27535f67c67/SkinCreamery-RossCharnockPhotography-6.jpg"
+},
+
+{
+id:"FC002",
+name:"Gentle Face Wash",
+category:"Face Care",
+price:199,
+quality:"Excellent",
+description:"Gentle cleanser for a fresh clean feel.",
+image:"https://www.eleven2.co.za/wp-content/uploads/2020/07/Gentle-Face-Wash-1-scaled.jpg"
+},
+{
+    id:"Cp003",
+    name: "Compact Powder",
+    category: "Makeup",
+    price: 299,
+   image:"https://incidecoder-content.storage.googleapis.com/a6f80048-f37a-4ea5-b9c1-761165649fbe/products/colorbar-compact/colorbar-compact_front_photo_original.jpeg", 
+    description: "Smooth and lightweight compact powder for a fresh look."
+}, 
+{
+    id:"Mc010",
+    name: "Maybelline Fit Me Compact Powder",
+    category: "Compact Powder",
+    price: 399,
+    image:"https://www.beautyplanetindia.com/cdn/shop/files/115.jpg?v=1720598673", 
+    description: "Lightweight compact powder for a smooth matte finish."
+},
+
+{
+    id:"Lc011",
+    name: "Lakme Radiance Compact",
+    category: "Compact Powder",
+    price: 325,
+    image:"https://cdn.sybazzar.com/public/200-200/ImportProducts/7BC969FB189CC3A-f935a8eb8a0352fbd45b3b90fbdc54b7.jpg", 
+    description: "Smooth compact powder for an even-looking finish."
+},
+
+{
+    id:"Cm012",
+    name: "Sugar Cosmetics Compact Powder",
+    category: "Compact Powder",
+    price: 449,
+    image:"https://incidecoder-content.storage.googleapis.com/a6f80048-f37a-4ea5-b9c1-761165649fbe/products/colorbar-compact/colorbar-compact_front_photo_original.jpeg",
+  description: "Soft and lightweight powder for everyday makeup."
+},
+
+{
+    id:"Cm013",
+    name: "Faces Canada Compact Powder",
+    category: "Compact Powder",
+    price: 379,
+    image:"https://www.facescanada.com/cdn/shop/files/1_7.jpg?v=1773822870", 
+    description: "Easy-to-use compact powder for a fresh makeup look."
+}, 
+{
+id:"FC003",
+name:"Vitamin C Serum",
+category:"Face Care",
+price:399,
+quality:"Premium",
+description:"Lightweight serum for your daily skincare routine.",
+image:"https://nuenouveau.com/cdn/shop/files/DSC09585.jpg?v=1727099218&width=1445"
+},
+
+{
+id:"FC004",
+name:"Glow Face Cream",
+category:"Face Care",
+price:329,
+quality:"Premium",
+description:"Nourishing face cream for everyday skincare.",
+image:"https://media.superpharm.eu/media/catalog/product/cache/07e643f7e64afe5b94f277b4a7389b28/8/8/8809738323687_3.png"
+},
+
+{
+id:"FC005",
+name:"Rose Toner",
+category:"Face Care",
+price:279,
+quality:"Excellent",
+description:"Refreshing toner for a simple skincare routine.",
+image:"https://www.medoget.com/cdn/shop/products/download_2_cdcb1b54-79c6-47c2-a9e5-bfbdec4a3f59.png?v=1643028112"
+},
+
+{
+id:"SC001",
+name:"Aloe Vera Gel",
+category:"Skin Care",
+price:199,
+quality:"Premium",
+description:"Refreshing aloe vera gel for everyday care.",
+image:"https://assets.myntassets.com/assets/images/32512916/2025/7/29/d7cacdd1-c25d-445b-93e6-0efbac1e4cfa1753788983331-HERBAL-TATVA-Pure-Aloe-Vera-Gel-For-Skin--Hair---200-g-15417-1.jpg"
+},
+
+{
+id:"SC002",
+name:"Daily Sunscreen",
+category:"Skin Care",
+price:349,
+quality:"Excellent",
+description:"Daily skincare essential for outdoor routines.",
+image:"https://www.dermatone.com/cdn/shop/files/new-sport-sunscreen-lotion-50-big.png?v=1775080484"
+},
+
+{
+id:"FA001",
+name:"Herbal Facial Kit",
+category:"Facial",
+price:499,
+quality:"Premium",
+description:"Complete facial care kit for your beauty routine.",
+image:"https://mantraherbal.in/cdn/shop/files/Herbalradiancefacialkit_08ea1290-2a99-4e4a-bfc8-5b37d54d24f5.jpg?v=1744350804&width=2000"
+},
+
+{
+id:"FA002",
+name:"Glow Facial Kit",
+category:"Facial",
+price:599,
+quality:"Premium",
+description:"Beauty facial kit with multiple skincare essentials.",
+image:"https://npbk.aromamagic.com/cdn/shop/products/Aroma_Magic_Diamond_Glow_Facial_Kit.jpg?v=1685514086"
+},
+
+{
+id:"FA003",
+name:"Rose Facial Kit",
+category:"Facial",
+price:449,
+quality:"Excellent",
+description:"Refreshing rose-inspired facial care kit.",
+image:"https://discountstore.pk/cdn/shop/files/81q_pgYNOHL.jpg?v=1737534475"
+},
+
+{
+id:"MU001",
+name:"Pink Lipstick",
+category:"Makeup",
+price:249,
+quality:"Premium",
+description:"Smooth pink lipstick for an everyday look.",
+image:"https://miss7.24sata.hr/media/img/07/40/034d5da1df34996b768c.jpeg"
+},
+
+{
+id:"MU003",
+name:"Eyeshadow",
+category:"Makeup",
+price:299,
+quality:"Premium",
+description:"Beautiful eyeshadow for attractive eye looks.",
+image:"https://dy6g3i6a1660s.cloudfront.net/aH_W1E14fLlsWtdakvtTCwGkAaQ/p_550x550-97/elf-studio-single-eyeshadow-saddle.jpg"
+},
+
+{
+id:"MU004",
+name:"Eyeshadow Palette",
+category:"Makeup",
+price:599,
+quality:"Premium",
+description:"Multi-color eyeshadow palette for different makeup looks.",
+image:"https://images.unsplash.com/photo-1583241800698-e8ab01830a07?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:"MU005",
+name:"Red Lipstick",
+category:"Makeup",
+price:279,
+quality:"Premium",
+description:"Classic red lipstick with a smooth finish.",
+image:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:"MU006",
+name:"Nude Lipstick",
+category:"Makeup",
+price:259,
+quality:"Excellent",
+description:"Elegant nude lipstick for an everyday look.",
+image:"https://www.goldenrose.com.tr/img/product/zoom/3389.jpg"
+},
+
+{
+id:"MU007",
+name:"Lip Gloss",
+category:"Makeup",
+price:229,
+quality:"Excellent",
+description:"Glossy lip color for a fresh shiny look.",
+image:"https://viaglamour.com/cdn/shop/files/lip-gloss-mockup_0009_136-cyrstal-clear.png?v=1735237186"
+},
+
+{
+id:"MU008",
+name:"Black Eyeliner",
+category:"Makeup",
+price:199,
+quality:"Premium",
+description:"Smooth black eyeliner for defined eyes.",
+image:"https://beautycorner.in/cdn/shop/files/41OXb3IgG7L._SL1080.jpg?v=1724906504&width=533"
+},
+
+{
+id:"MU009",
+name:"Mascara",
+category:"Makeup",
+price:149,
+quality:"Premium",
+description:"Mascara for a beautiful eye makeup look.",
+image:"https://static.ananas.rs/assets/categories/lepota_i_nega/sminka/sminka_za_oci/maskara.jpg"
+},
+
+{
+id:"MU010",
+name:"Makeup Brush Set",
+category:"Makeup",
+price:399,
+quality:"Premium",
+description:"Makeup brush set for face and eye makeup.",
+image:"https://www.paccosmetics.com/cdn/shop/files/8904341201305_IMG.main.jpg?v=1703392810&width=1500"
+},
+
+{
+id:"MU011",
+name:"Highlighter",
+category:"Makeup",
+price:249,
+quality:"Premium",
+description:"Soft highlighter for a glowing makeup finish.",
+image:"https://ateneaprofesional.com/cdn/shop/files/10_1080x1080.png?v=1699368424"
+},
+
+{
+id:"HC001",
+name:"Hair Serum",
+category:"Hair Care",
+price:299,
+quality:"Excellent",
+description:"Lightweight serum for smooth-looking hair.",
+image:"https://npluspro.com/cdn/shop/files/Hairserum-Photoroom_3_1400x.jpg?v=1715334419"
+},
+
+{
+id:"SH001",
+name:"Mycare Shampoo",
+category:"Hair Shampoo",
+price:199,
+quality:"Excellent",
+description:"Gentle shampoo for everyday hair care.",
+image:"https://images.unsplash.com/photo-1585232351009-aa87416fca90?w=500"
+},
+
+{
+id:"SH002",
+name:"TRESemmé Shampoo",
+category:"Hair Shampoo",
+price:250,
+quality:"Excellent",
+description:"Professional care shampoo for smooth-looking hair.",
+image:"https://www.beautiegen.com/images/thumbs/0015237_tresemme-keratin-smooth-shampoo-400ml.png"
+},
+
+{
+id:"SH003",
+name:"Herbal Shampoo",
+category:"Hair Shampoo",
+price:249,
+quality:"Excellent",
+description:"Herbal shampoo for everyday hair care.",
+image:"https://cpimg.tistatic.com/10659350/b/4/Natural-Hair-Cleanser-Herbal-Shampoo..jpg"
+},
+
+{
+id:"SH004",
+name:"Aloe Shampoo",
+category:"Hair Shampoo",
+price:200,
+quality:"Premium",
+description:"Aloe-based shampoo for fresh and clean-looking hair.",
+image:"https://media.douglas.cz/medias/Cqoff81187830-0-dgl-CZ.jpg?context=bWFzdGVyfGltYWdlc3w2MTE2MHxpbWFnZS9qcGVnfGFHWXlMMmd4TXk4ME9UYzVPREExTVRjNU1EZzNPQzlEY1c5bVpqZ3hNVGczT0RNd1h6QmZaR2RzTFVOYUxtcHdad3xjZjViYTZmMjg4ZTE2YmI5MDBlN2Y1MGRiZjVjNGY1ZDExYjVlMjg5N2E5NWRlMDc4MjI2ZmU0OTkwMmU0NzU1&grid=true"
+},
+
+{
+id:"SH005",
+name:"Smooth Care Shampoo",
+category:"Hair Shampoo",
+price:210,
+quality:"Premium",
+description:"Smooth care shampoo for regular hair washing.",
+image:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=500"
+}
+
+];
+
+
+/* =========================================
+   CART
+========================================= */
+
+let cart = [];
+let selectedProduct = null;
+
+
+/* =========================================
+   DISPLAY PRODUCTS
+========================================= */
+
+function displayProducts(list){
+
+const box = document.getElementById("products");
+
+box.innerHTML = "";
+
+if(list.length === 0){
+
+box.innerHTML =
+"<p style='text-align:center;'>No products found 🔍</p>";
+
+return;
+
+}
+
+list.forEach(function(product){
+
+const index = products.indexOf(product);
+
+box.innerHTML += `
+
+<div class="product">
+
+<img
+src="${product.image}"
+alt="${product.name}"
+>
+
+<div class="productId">
+Product ID: ${product.id}
+</div>
+
+<h3>${product.name}</h3>
+
+<div class="price">
+₹${product.price}
+</div>
+
+<button
+class="viewBtn"
+data-view="${index}">
+View Product
+</button>
+
+<button
+class="addBtn"
+data-add="${index}">
+Add to Cart
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================================
+   PRODUCT CLICK
+========================================= */
+
+document.getElementById("products")
+.addEventListener("click",function(event){
+
+if(event.target.dataset.view){
+
+const index =
+Number(event.target.dataset.view);
+
+showDetails(products[index]);
+
+}
+
+if(event.target.dataset.add){
+
+const index =
+Number(event.target.dataset.add);
+
+addToCart(products[index]);
+
+}
+
+});
+
+
+/* =========================================
+   PRODUCT DETAILS
+========================================= */
+
+function showDetails(product){
+
+selectedProduct = product;
+
+document.getElementById("details")
+.style.display = "block";
+
+document.getElementById("detailImage")
+.src = product.image;
+
+document.getElementById("detailName")
+.textContent = product.name;
+
+document.getElementById("detailQuality")
+.textContent = product.quality;
+
+document.getElementById("detailDescription")
+.textContent = product.description;
+
+document.getElementById("detailPrice")
+.textContent = product.price;
+
+document.getElementById("details")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   DETAIL ADD
+========================================= */
+
+document.getElementById("detailAdd")
+.addEventListener("click",function(){
+
+if(selectedProduct){
+
+addToCart(selectedProduct);
+
+}
+
+});
+
+
+/* =========================================
+   ADD TO CART
+========================================= */
+
+function addToCart(product){
+
+const existing =
+cart.find(function(item){
+
+return item.id === product.id;
+
+});
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
+
+id:product.id,
+name:product.name,
+price:product.price,
+quality:product.quality,
+quantity:1
+
+});
+
+}
+
+updateCart();
+
+}
+
+
+/* =========================================
+   UPDATE CART
+========================================= */
+
+function updateCart(){
+
+const box =
+document.getElementById("cartList");
+
+const count =
+document.getElementById("cartCount");
+
+if(cart.length === 0){
+
+box.innerHTML = `
+<p style="text-align:center;">
+Your Cart is Empty 🛒
+</p>
+`;
+
+count.textContent = "0";
+
+return;
+
+}
+
+let html = "";
+let total = 0;
+let totalQuantity = 0;
+
+cart.forEach(function(item,index){
+
+const subtotal =
+item.price * item.quantity;
+
+total += subtotal;
+totalQuantity += item.quantity;
+
+html += `
+
+<div class="cartItem">
+
+<h3>${item.name}</h3>
+
+<p>
+Product ID: ${item.id}
+</p>
+
+<p>
+⭐ Quality: ${item.quality}
+</p>
+
+<p>
+Price: ₹${item.price}
+</p>
+
+<div class="quantity">
+
+<button data-minus="${index}">
+−
+</button>
+
+<span>${item.quantity}</span>
+
+<button data-plus="${index}">
++
+</button>
+
+</div>
+
+<p>
+Subtotal:
+<b>₹${subtotal}</b>
+</p>
+
+<button
+class="removeBtn"
+data-remove="${index}">
+Remove
+</button>
+
+</div>
+
+`;
+
+});
+
+html += `
+<div class="total">
+Total: ₹${total}
+</div>
+`;
+
+box.innerHTML = html;
+
+count.textContent = totalQuantity;
+
+}
+
+
+/* =========================================
+   CART ACTIONS
+========================================= */
+
+document.getElementById("cartList")
+.addEventListener("click",function(event){
+
+if(event.target.dataset.plus){
+
+const index =
+Number(event.target.dataset.plus);
+
+cart[index].quantity++;
+
+updateCart();
+
+}
+
+if(event.target.dataset.minus){
+
+const index =
+Number(event.target.dataset.minus);
+
+if(cart[index].quantity > 1){
+
+cart[index].quantity--;
+
+}else{
+
+cart.splice(index,1);
+
+}
+
+updateCart();
+
+}
+
+if(event.target.dataset.remove){
+
+const index =
+Number(event.target.dataset.remove);
+
+cart.splice(index,1);
+
+updateCart();
+
+}
+
+});
+
+
+/* =========================================
+   CATEGORIES
+========================================= */
+
+document.getElementById("categories")
+.addEventListener("click",function(event){
+
+if(!event.target.dataset.category){
+return;
+}
+
+const category =
+event.target.dataset.category;
+
+document.querySelectorAll("#categories button")
+.forEach(function(button){
+
+button.classList.remove("active");
+
+});
+
+event.target.classList.add("active");
+
+document.getElementById("searchInput").value = "";
+
+if(category === "All"){
+
+displayProducts(products);
+
+}else{
+
+const filtered =
+products.filter(function(product){
+
+return product.category === category;
+
+});
+
+displayProducts(filtered);
+
+}
+
+document.getElementById("products")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+function searchProducts(){
+
+const search =
+document.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
+
+if(search === ""){
+
+displayProducts(products);
+
+return;
+
+}
+
+const filtered =
+products.filter(function(product){
+
+return product.name
+.toLowerCase()
+.includes(search)
+
+||
+
+product.category
+.toLowerCase()
+.includes(search)
+
+||
+
+product.id
+.toLowerCase()
+.includes(search);
+
+});
+
+displayProducts(filtered);
+
+}
+
+document.getElementById("searchInput")
+.addEventListener("input",searchProducts);
+
+document.getElementById("searchBtn")
+.addEventListener("click",searchProducts);
+
+
+/* =========================================
+   SHOP NOW
+========================================= */
+
+document.getElementById("shopBtn")
+.addEventListener("click",function(){
+
+document.getElementById("products")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+/* =========================================
+   CART TOP
+========================================= */
+
+document.getElementById("cartTop")
+.addEventListener("click",function(){
+
+document.getElementById("cartBox")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+/* =========================================
+   PLACE ORDER
+========================================= */
+
+document.getElementById("orderBtn")
+.addEventListener("click",async function(){
+
+if(cart.length === 0){
+
+alert("Please add a product to cart first 🛒");
+return;
+
+}
+
+const name =
+document.getElementById("name").value.trim();
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const address =
+document.getElementById("address").value.trim();
+
+const payment =
+document.getElementById("payment").value;
+
+if(
+name === "" ||
+phone === "" ||
+address === "" ||
+payment === ""
+){
+
+alert("Please fill all customer details and select payment method.");
+return;
+
+}
+
+if(phone.length < 10){
+
+alert("Please enter a valid mobile number.");
+return;
+
+}
+
+
+/* =========================================
+   ORDER CALCULATION
+========================================= */
+
+let quantity = 0;
+let total = 0;
+
+cart.forEach(function(item){
+
+quantity += item.quantity;
+
+total += item.price * item.quantity;
+
+});
+
+
+/*
+   Multiple products असल्यास त्यांची नावे
+   comma ने database मध्ये जातील.
+*/
+
+const productName =
+cart.map(function(item){
+return item.name;
+}).join(", ");
+
+
+/* =========================================
+   SUPABASE INSERT
+========================================= */
+
+try{
+
+const response = await fetch(
+
+SUPABASE_URL + "/rest/v1/Order",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json",
+
+"apikey":SUPABASE_KEY,
+
+"Authorization":"Bearer " + SUPABASE_KEY,
+
+"Prefer":"return=minimal"
+
+},
+
+body:JSON.stringify({
+
+Customer_name:name,
+
+Mobile_number:phone,
+
+Address:address,
+
+Product_name:productName,
+
+Quantity:quantity,
+
+Price:total,
+
+Total:total,
+
+Status:"Pending",
+
+payment_method:payment
+
+})
+
+}
+
+);
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+if(!response.ok){
+
+const errorText =
+await response.text();
+
+console.error(
+"SUPABASE ERROR:",
+errorText
+);
+
+alert(
+"Order save झाला नाही.\n\n" +
+errorText
+);
+
+return;
+
+}
+
+
+/* =========================================
+   SUCCESS
+========================================= */
+
+document.getElementById("successText")
+.innerHTML = `
+
+Thank you
+<b>${name}</b>! 💖
+
+<br><br>
+
+Order has been placed successfully! 🎉
+
+<br><br>
+
+Payment Method:
+<b>${payment}</b>
+
+<br><br>
+
+Total Quantity:
+<b>${quantity}</b>
+
+<br><br>
+
+Total Amount:
+<b>₹${total}</b>
+
+<br><br>
+
+Status:
+<b>Pending</b>
+
+`;
+
+
+document.getElementById("success")
+.style.display = "block";
+
+
+/* CLEAR CART */
+
+cart = [];
+
+updateCart();
+
+
+/* CLEAR FORM */
+
+document.getElementById("name").value = "";
+document.getElementById("phone").value = "";
+document.getElementById("address").value = "";
+document.getElementById("payment").value = "";
+
+
+/* SCROLL SUCCESS */
+
+document.getElementById("success")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+
+}catch(error){
+
+console.error(
+"CONNECTION ERROR:",
+error
+);
+
+alert(
+"Supabase connection होत नाही.\n\n" +
+error.message
+);
+
+}
+
+});
+
+
+/* =========================================
+   START
+========================================= */
+
+displayProducts(products);
+
+updateCart();
+
+</script>
+
+</body>
+</html>
